@@ -32,14 +32,16 @@ class Contract(models.Model):
     area = models.PositiveIntegerField()
     money = models.PositiveBigIntegerField()
     month = models.PositiveIntegerField()
-    monthTomoney = models.CharField(max_length=25)  # Faqat o'qish uchun
+    advance_payment = models.PositiveBigIntegerField(null=True, blank=True, default=0)
+    monthTomoney = models.CharField(max_length=25, editable=False)  # Faqat o'qish uchun
 
     def save(self, *args, **kwargs):
         if self.month > 0:
-            self.monthTomoney = "{:.2f}".format(self.money / self.month)
+            self.monthTomoney = "{:.2f}".format((self.money - self.advance_payment) / self.month)
         else:
             self.monthTomoney = "Invalid input"
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.full_name}"
+

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!isNaN(money) && !isNaN(month) && month > 0) {
             const monthTomoney = money / month;
-            monthTomoneyInput.value = monthTomoney.toFixed(2); // 2 o'nlik nuqta bilan
+            monthTomoneyInput.value = monthTomoney.toFixed(2); 
         } else {
             monthTomoneyInput.value = "Invalid input";
         }
