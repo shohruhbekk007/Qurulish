@@ -24,23 +24,6 @@ class City(models.Model):
     def __str__(self) -> str:
         return self.name
     
-
-# class Contract(models.Model):
-#     city = models.ForeignKey(to=City, on_delete=models.CASCADE)
-#     full_name = models.ForeignKey(to=Costumer, on_delete=models.CASCADE)
-#     room = models.PositiveIntegerField()
-#     area = models.PositiveIntegerField()
-#     money = models.PositiveBigIntegerField()
-#     month = models.PositiveIntegerField()
-#     monthTomoney = models.CharField(max_length=25)
-
-#     def get_money(self):
-#         return self.money / self.month
-
-
-#     def __str__(self) -> str:
-#         return f"{self.full_name}"
-
     
 class Contract(models.Model):
     city = models.ForeignKey(to=City, on_delete=models.CASCADE)
@@ -49,7 +32,7 @@ class Contract(models.Model):
     area = models.PositiveIntegerField()
     money = models.PositiveBigIntegerField()
     month = models.PositiveIntegerField()
-    monthTomoney = models.CharField(max_length=25, editable=False)  # Faqat o'qish uchun
+    monthTomoney = models.CharField(max_length=25)  # Faqat o'qish uchun
 
     def save(self, *args, **kwargs):
         if self.month > 0:
