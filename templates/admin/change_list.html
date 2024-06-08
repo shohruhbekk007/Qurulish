@@ -4,18 +4,19 @@
 {% block content %}
   <style>
     .colorize-row {
-        background-color: #ffdddd !important;
+        background-color: rgb(255, 132, 132) !important;
+    }
+    .colorize-row a,
+    .colorize-row td {
+      color: black !important;
     }
   </style>
   {{ block.super }}
   <script type="text/javascript">
     (function($) {
       $(document).ready(function(){
-        $('tr').each(function() {
-          var mavzu = $(this).find('td:contains("sotib olmoqchi")');
-          if (!mavzu.length) {
-            $(this).addClass('colorize-row');
-          }
+        $('td:contains("o\'ylab kormoqchi")').each(function() {
+          $(this).closest('tr').addClass('colorize-row');
         });
       });
     })(django.jQuery);
