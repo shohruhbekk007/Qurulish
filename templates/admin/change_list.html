@@ -1,24 +1,31 @@
-{% extends "admin/change_list.html" %}
-{% load static %}
-
-{% block content %}
-  <style>
-    .colorize-row {
-        background-color: rgb(255, 132, 132) !important;
-    }
-    .colorize-row a,
-    .colorize-row td {
-      color: black !important;
-    }
-  </style>
-  {{ block.super }}
-  <script type="text/javascript">
-    (function($) {
-      $(document).ready(function(){
-        $('td:contains("o\'ylab kormoqchi")').each(function() {
-          $(this).closest('tr').addClass('colorize-row');
-        });
+{% extends "admin/change_list.html" %} {% load static %} {% block search %}
+<button href="#" class="custom-button" onclick="customAction()">
+  Sms yuborish
+</button>
+<script>
+  document.querySelector(".custom-button").parentElement.style.flexDirection =
+    "row-reverse";
+  document.querySelector(".custom-button").parentElement.style.justifyContent =
+    "space-between";
+</script>
+{{ block.super }} {% endblock %} {% block content %}
+<style>
+  .colorize-row {
+    background-color: rgb(255, 132, 132) !important;
+  }
+  .colorize-row a,
+  .colorize-row td {
+    color: black !important;
+  }
+</style>
+{{ block.super }}
+<script type="text/javascript">
+  (function ($) {
+    $(document).ready(function () {
+      $('td:contains("o\'ylab kormoqchi")').each(function () {
+        $(this).closest("tr").addClass("colorize-row");
       });
-    })(django.jQuery);
-  </script>
+    });
+  })(django.jQuery);
+</script>
 {% endblock %}

@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from main.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/custom_action/<int:customer_id>/', custom_action_view, name='custom_action'),
+
 ]
 
 

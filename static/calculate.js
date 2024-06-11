@@ -20,3 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
         monthInput.addEventListener('input', calculateMonthTomoney);
     }
 });
+
+
+function customAction() {
+    alert('Button clicked!');
+    // Add your custom functionality here
+}

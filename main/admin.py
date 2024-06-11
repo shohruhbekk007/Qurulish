@@ -3,6 +3,8 @@ from django.contrib.auth.models import User, Group
 from .models import *
 from .forms import ContractForm
 from unfold.admin import ModelAdmin
+from django.urls import reverse
+from django.utils.html import format_html
 
 
 admin.site.unregister(User)
@@ -21,9 +23,10 @@ class CityAdmin(ModelAdmin):
     fields = list_display
 
 @admin.register(Costumer)
-class CostumerAdmin(ModelAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'father_name', 'phone_number', 'mavzu')
-    list_filter = ("mavzu", )
+    # list_filter = ("mavzu", )
+    # search_fields = ('last_name',)
 
     def get_row_color(self, obj):
         return 'colorize-row' if obj.mavzu != 'sotib olmoqchi' else ''
@@ -35,7 +38,6 @@ class CostumerAdmin(ModelAdmin):
         css = {
             'all': ('admin/css/custom_admin.css',)
         }
-
 
 @admin.register(Contract)
 class ContractAdmin(ModelAdmin):

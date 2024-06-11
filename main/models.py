@@ -41,7 +41,16 @@ class Contract(models.Model):
         else:
             self.monthTomoney = "Invalid input"
         super().save(*args, **kwargs)
+    
+
 
     def __str__(self) -> str:
         return f"{self.full_name}"
 
+# class ProfileMod(models.Model):
+#     name = models.ForeignKey(to=Costumer,on_delete=models.CASCADE)
+#     user_number=models.ForeignKey(to=Costumer,on_delete=models.CASCADE)
+#     duty = models.IntegerField()
+
+#     def __str__(self) -> str:
+#         return self.name
