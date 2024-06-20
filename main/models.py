@@ -3,21 +3,23 @@ from django.db import models
 # Create your models here.
 
 class Costumer(models.Model):
-    first_name = models.CharField(max_length=25)
-    last_name = models.CharField(max_length=25)
-    father_name = models.CharField(max_length=25)
-    phone_number= models.CharField(max_length=25)
-    mavzu = models.CharField(max_length=60)
-    created = models.DateTimeField(auto_now_add=True)
+    first_name = models.CharField(max_length=25, verbose_name="Ism")
+    last_name = models.CharField(max_length=25, verbose_name="Familya")
+    father_name = models.CharField(max_length=25, verbose_name="otasi ism")
+    phone_number= models.CharField(max_length=25, verbose_name="Telefon no'mr")
+    mavzu = models.CharField(max_length=60, verbose_name="xullosa")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Yaratilish vaqti")
 
-
+    class Meta:
+        verbose_name = 'Costumer'
+        verbose_name_plural = 'Costumers'
 
     def __str__(self) -> str:
-        return self.first_name
+        return f"{self.first_name} {self.last_name}"
     
 
 class City(models.Model):
-    name = models.CharField(max_length=70)
+    name = models.CharField(max_length=70, verbose_name="Sotiladigan bino")
     created = models.DateTimeField(auto_now_add=True)
 
 
@@ -26,14 +28,14 @@ class City(models.Model):
     
     
 class Contract(models.Model):
-    city = models.ForeignKey(to=City, on_delete=models.CASCADE)
-    full_name = models.ForeignKey(to=Costumer, on_delete=models.CASCADE)
-    room = models.PositiveIntegerField()
-    area = models.PositiveIntegerField()
-    money = models.PositiveBigIntegerField()
-    month = models.PositiveIntegerField()
-    advance_payment = models.PositiveBigIntegerField(null=True, blank=True, default=0)
-    monthTomoney = models.CharField(max_length=25, editable=False)  # Faqat o'qish uchun
+    city = models.ForeignKey(to=City, on_delete=models.CASCADE, verbose_name='Sotiladigan bino')
+    full_name = models.ForeignKey(to=Costumer, on_delete=models.CASCADE, verbose_name="Xaridor To'liq ismi")
+    room = models.PositiveIntegerField(verbose_name="Uy xonalar soni")
+    area = models.PositiveIntegerField(verbose_name="maydoni")
+    money = models.PositiveBigIntegerField(verbose_name="Binoning narxi")
+    month = models.PositiveIntegerField(verbose_name="Qancha oyga olmoqchi")
+    advance_payment = models.PositiveBigIntegerField(null=True, blank=True, default=0, verbose_name="Oldindan qancha to'lov")
+    monthTomoney = models.CharField(max_length=25, editable=False, verbose_name="Oyiga")  # Faqat o'qish uchun
 
     def save(self, *args, **kwargs):
         if self.month > 0:
@@ -47,10 +49,12 @@ class Contract(models.Model):
     def __str__(self) -> str:
         return f"{self.full_name}"
 
-# class ProfileMod(models.Model):
-#     name = models.ForeignKey(to=Costumer,on_delete=models.CASCADE)
-#     user_number=models.ForeignKey(to=Costumer,on_delete=models.CASCADE)
-#     duty = models.IntegerField()
+class SmsMessage(models.Model):
+    name = 'sms xabarlar'
+    all_costumer = models.CharField(max_length=70)
+    all_contract = models.CharField(max_length=70)
 
-#     def __str__(self) -> str:
-#         return self.name
+
+    def __str__(self) -> str:
+        return self.name
+

@@ -1,7 +1,5 @@
 {% extends "admin/change_list.html" %} {% load static %} {% block search %}
-<button href="#" class="custom-button" onclick="customAction()">
-  Sms yuborish
-</button>
+{{ sms_yuborish_button|safe }}
 <script>
   document.querySelector(".custom-button").parentElement.style.flexDirection =
     "row-reverse";

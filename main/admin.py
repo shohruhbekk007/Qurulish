@@ -22,8 +22,9 @@ class CityAdmin(ModelAdmin):
     list_display = ("name",)
     fields = list_display
 
+
 @admin.register(Costumer)
-class CustomerAdmin(admin.ModelAdmin):
+class CustomerAdmin(ModelAdmin):
     list_display = ('first_name', 'last_name', 'father_name', 'phone_number', 'mavzu')
     # list_filter = ("mavzu", )
     # search_fields = ('last_name',)
@@ -33,6 +34,12 @@ class CustomerAdmin(admin.ModelAdmin):
 
     get_row_color.short_description = 'Color'
     get_row_color.admin_order_field = 'mavzu'
+
+    def changelist_view(self, request, extra_context = None):
+        custom_context = {"sms_yuborish_button": "<button href=\"#\" class=\"custom-button\" onclick='customAction()'>Sms yuborish</button>"}
+        extra_context = extra_context or {}
+        extra_context.update(custom_context)
+        return super().changelist_view(request, extra_context=extra_context)
 
     class Media:
         css = {
@@ -51,3 +58,7 @@ class ContractAdmin(ModelAdmin):
         else:
             obj.monthTomoney = "Invalid input"
         super().save_model(request, obj, form, change)
+
+@admin.register(SmsMessage)
+class SmsAdmin(ModelAdmin):
+    list_display = ['name']
