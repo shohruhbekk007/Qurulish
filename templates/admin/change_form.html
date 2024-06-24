@@ -1,0 +1,62 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block content %}
+{{ block.super }}
+
+{% if title == "Change contract" %}
+<script type="text/javascript">
+    function customAction() {
+        alert('Custom button clicked!');
+        // Add your custom action logic here
+    }
+
+    let parent = document.querySelector('#content > div');
+    let node = `
+    <div class="submit-row">
+        <button class="custom-button" onclick="customAction()">Custom Button</button>
+    </div>`;
+
+    parent.insertAdjacentHTML('afterbegin', node);
+</script>
+{% endif %}
+
+<style>
+    .custom-button {
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .custom-button:hover {
+        background-color: #0056b3;
+    }
+
+    .submit-row{
+        margin-bottom: 8px;
+        margin-right: 16px;
+    }
+</style>
+
+{% endblock %}
+<script>
+    function customAction() {
+    alert('Custom button clicked!');
+    // Add your custom action logic here
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    let parent = document.querySelector('#content > div');
+    let node = `
+    <div class="submit-row">
+        <button class="custom-button" onclick="customAction()">Custom Button</button>
+    </div>`;
+
+    parent.insertAdjacentHTML('afterbegin', node);
+});
+
+</script>

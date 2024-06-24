@@ -26,6 +26,9 @@ class City(models.Model):
     def __str__(self) -> str:
         return self.name
     
+
+
+    
     
 class Contract(models.Model):
     city = models.ForeignKey(to=City, on_delete=models.CASCADE, verbose_name='Sotiladigan bino')

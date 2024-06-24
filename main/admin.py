@@ -5,7 +5,8 @@ from .forms import ContractForm
 from unfold.admin import ModelAdmin
 from django.urls import reverse
 from django.utils.html import format_html
-
+from django.urls import path
+from django.shortcuts import redirect
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -26,9 +27,6 @@ class CityAdmin(ModelAdmin):
 @admin.register(Costumer)
 class CustomerAdmin(ModelAdmin):
     list_display = ('first_name', 'last_name', 'father_name', 'phone_number', 'mavzu')
-    # list_filter = ("mavzu", )
-    # search_fields = ('last_name',)
-
     def get_row_color(self, obj):
         return 'colorize-row' if obj.mavzu != 'sotib olmoqchi' else ''
 
@@ -46,12 +44,32 @@ class CustomerAdmin(ModelAdmin):
             'all': ('admin/css/custom_admin.css',)
         }
 
+
+# @admin.register(Contract)
+# class ContractAdmin(ModelAdmin):
+#     form = ContractForm
+#     list_display = ['city', 'full_name', 'room', 'monthTomoney']
+#     change_form_template = "admin/change_form.html"
+
+#     class Media:
+#         js = ('js/calculate.js',)
+
+#     def save_model(self, request, obj, form, change):
+#         if obj.month > 0:
+#             obj.monthTomoney = str(obj.money / obj.month)
+#         else:
+#             obj.monthTomoney = "Invalid input"
+#         super().save_model(request, obj, form, change)
+
 @admin.register(Contract)
 class ContractAdmin(ModelAdmin):
     form = ContractForm
     list_display = ['city', 'full_name', 'room', 'monthTomoney']
+    change_form_template = "admin/change_form.html"
+
     class Media:
         js = ('js/calculate.js',)
+
     def save_model(self, request, obj, form, change):
         if obj.month > 0:
             obj.monthTomoney = str(obj.money / obj.month)
@@ -59,6 +77,33 @@ class ContractAdmin(ModelAdmin):
             obj.monthTomoney = "Invalid input"
         super().save_model(request, obj, form, change)
 
+    def changelist_view(self, request, extra_context=None):
+        custom_context = {
+            "contract_check_button": format_html(
+                '<a href="{}" class="custom-button">Check Contract</a>',
+                reverse('contract_check')
+            )
+        }
+        extra_context = extra_context or {}
+        extra_context.update(custom_context)
+        return super().changelist_view(request, extra_context=extra_context)
+
 @admin.register(SmsMessage)
 class SmsAdmin(ModelAdmin):
     list_display = ['name']
+
+    def changelist_view(self, request, extra_context=None):
+        custom_context = {
+            "sms_yuborish_button": format_html(
+                '<a href="{}" class="custom-button">Hisobot</a>',
+                reverse('chek')
+            )
+        }
+        extra_context = extra_context or {}
+        extra_context.update(custom_context)
+        return super().changelist_view(request, extra_context=extra_context)
+
+    class Media:
+        css = {
+            'all': ('admin/css/custom_admin.css',)
+        }

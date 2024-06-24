@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кассовый чек</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="receipt">
+        <div class="body">
+            <h2>Logo.</h2>
+            <div class="item"></div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>City</th>
+                        {% for i in posts %}
+                            <td>{{ i.city }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Room</th>
+                        {% for i in posts %}
+                            <td>{{ i.room }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        {% for i in posts %}
+                            <td>{{ i.money }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Month</th>
+                        {% for i in posts %}
+                            <td>{{ i.month }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Advance</th>
+                        {% for i in posts %}
+                            <td>{{ i.advance_payment }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>MonthToMoney</th>
+                        {% for i in posts %}
+                            <td>{{ i.monthTomoney }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+            <div class="total">
+                {% for i in posts %}
+                    <p>{{ i.full_name }}</p>
+                    <p class="total-amount">{{ data }}</p>
+                    <p class="total-amount">__________</p>
+                {% endfor %}
+            </div>
+            <div class="total">
+                <p>Admin Name</p>
+                <p class="total-amount">{{ data }}</p>
+                <p class="total-amount">__________</p>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .receipt {
+        width: 350px;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+        color: #333;
+    }
+
+    .header, .body, .footer {
+        margin-bottom: 20px;
+    }
+
+    .body h2 {
+        margin-bottom: 20px;
+        color: #007bff;
+        text-align: center;
+    }
+
+    .item {
+        border-bottom: 1px dashed #ccc;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .total {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+</style>
+</html>

@@ -1,18 +1,19 @@
 .colorize-row {
-    background-color: #961a1a !important;
+    background-color: #fa0505 !important;
 }
 
-
-/* static/admin/css/custom_admin.css */
-a.button {
+.custom-button {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 8px 16px;
+    padding: 10px 24px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 4px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
