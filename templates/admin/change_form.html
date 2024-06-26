@@ -14,7 +14,7 @@
     let parent = document.querySelector('#content > div');
     let node = `
     <div class="submit-row">
-        <button class="custom-button" onclick="customAction()">Custom Button</button>
+        {{ pdf_button|safe }}
     </div>`;
 
     parent.insertAdjacentHTML('afterbegin', node);

@@ -45,48 +45,25 @@ class CustomerAdmin(ModelAdmin):
         }
 
 
-# @admin.register(Contract)
-# class ContractAdmin(ModelAdmin):
-#     form = ContractForm
-#     list_display = ['city', 'full_name', 'room', 'monthTomoney']
-#     change_form_template = "admin/change_form.html"
-
-#     class Media:
-#         js = ('js/calculate.js',)
-
-#     def save_model(self, request, obj, form, change):
-#         if obj.month > 0:
-#             obj.monthTomoney = str(obj.money / obj.month)
-#         else:
-#             obj.monthTomoney = "Invalid input"
-#         super().save_model(request, obj, form, change)
 
 @admin.register(Contract)
 class ContractAdmin(ModelAdmin):
-    form = ContractForm
     list_display = ['city', 'full_name', 'room', 'monthTomoney']
     change_form_template = "admin/change_form.html"
 
-    class Media:
-        js = ('js/calculate.js',)
-
-    def save_model(self, request, obj, form, change):
-        if obj.month > 0:
-            obj.monthTomoney = str(obj.money / obj.month)
-        else:
-            obj.monthTomoney = "Invalid input"
-        super().save_model(request, obj, form, change)
-
-    def changelist_view(self, request, extra_context=None):
-        custom_context = {
-            "contract_check_button": format_html(
-                '<a href="{}" class="custom-button">Check Contract</a>',
-                reverse('contract_check')
-            )
-        }
+    def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
-        extra_context.update(custom_context)
-        return super().changelist_view(request, extra_context=extra_context)
+        extra_context['contract_check_button'] = format_html(
+            '<a href="{}" class="custom-button" target="_blank">Check Contract</a>',
+            reverse('admin_contract_check')
+        )
+        extra_context['pdf_button'] = format_html(
+            '<a href="{}" class="custom-button" target="_blank">View PDF</a>',
+            reverse('admin_contract_pdf', args=[object_id])
+        )
+        return super().change_view(request, object_id, form_url, extra_context=extra_context)
+
+
 
 @admin.register(SmsMessage)
 class SmsAdmin(ModelAdmin):

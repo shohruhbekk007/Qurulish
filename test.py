@@ -1,16 +1,53 @@
-import requests
-from bs4 import BeautifulSoup as bts
+from eskiz_sms import EskizSMS
 
-url = requests.get("https://olcha.uz/ru/category/s-ruki-olcha")
+# Создаем экземпляр класса EskizSMS
+sms_sender = EskizSMS(api_key='https://notify.eskiz.uz/api', api_secret='zeyu5tlOIttzoINCFEpPVXBe2n1KuWu5tXJnKa0q')
 
-# print(url.status_code)
-html_content = bts(url.content, 'html.parser')
+# Номер телефона, на который отправляем SMS
+phone_number = '+998883601656'
+
+# Текст сообщения
+message = 'salom maktab'
+
+# Отправка SMS
+response = sms_sender.send_sms(to=phone_number, text=message)
+
+# Обработка ответа
+if response['status'] == 'success':
+    print('SMS успешно отправлено')
+else:
+    print(f'Ошибка при отправке SMS: {response["message"]}')
 
 
 
-for buyum in html_content.select("#splide__track splide__track--slide splide__track--ltr splide__track--draggable"):
-    a = buyum.select(".product-card _big .product-card__content")[0].text
-    print(a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import requests
+# from bs4 import BeautifulSoup as bts
+
+# url = requests.get("https://olcha.uz/ru/category/s-ruki-olcha")
+
+# # print(url.status_code)
+# html_content = bts(url.content, 'html.parser')
+
+
+
+# for buyum in html_content.select("#splide__track splide__track--slide splide__track--ltr splide__track--draggable"):
+#     a = buyum.select(".product-card _big .product-card__content")[0].text
+#     print(a)
 
 
 

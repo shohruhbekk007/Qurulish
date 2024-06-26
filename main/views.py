@@ -4,17 +4,35 @@ from .models import Costumer, Contract
 from django.db.models import Count,Sum
 from django.http import HttpResponse
 from datetime import datetime
+import weasyprint
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+import pdfkit
 
+
+
+
+
+
+def contract_pdf_view(request, contract_id):
+    contract = get_object_or_404(Contract, pk=contract_id)
+    context = {
+        'contract': contract,
+    }
+    html = render_to_string('chek_one.html', context)
+    
+    pdf = weasyprint.HTML(string=html).write_pdf()
+    
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="contract_{}.pdf"'.format(contract_id)
+    return response
+
+def contract_check(request):
+    return HttpResponse("This is the contract check view.")
 
 
 def CheckPage(request):
     return HttpResponse("This is the check page")
-
-def ContractPage(request):
-    now = datetime.now()
-    date = now.date()
-    contract = Contract.objects.filter(id=2)
-    return render(request, 'check_one.html', {'posts': contract, 'data': date})
 
 
 
