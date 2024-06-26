@@ -65,6 +65,25 @@ class ContractAdmin(ModelAdmin):
 
 
 
+# @admin.register(SmsMessage)
+# class SmsAdmin(ModelAdmin):
+#     list_display = ['name']
+
+#     def changelist_view(self, request, extra_context=None):
+#         custom_context = {
+#             "sms_yuborish_button": format_html(
+#                 '<a href="{}" class="custom-button">Hisobot</a>',
+#                 reverse('chek')
+#             )
+#         }
+#         extra_context = extra_context or {}
+#         extra_context.update(custom_context)
+#         return super().changelist_view(request, extra_context=extra_context)
+
+#     class Media:
+#         css = {
+#             'all': ('admin/css/custom_admin.css',)
+#         }
 @admin.register(SmsMessage)
 class SmsAdmin(ModelAdmin):
     list_display = ['name']
@@ -72,7 +91,7 @@ class SmsAdmin(ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         custom_context = {
             "sms_yuborish_button": format_html(
-                '<a href="{}" class="custom-button">Hisobot</a>',
+                '<a href="{}" class="custom-button" target="_blank">Hisobot</a>',
                 reverse('chek')
             )
         }

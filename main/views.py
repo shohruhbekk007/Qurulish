@@ -46,6 +46,18 @@ def custom_action_view(request, customer_id):
 
 
 
+# def CheckPage(request):
+#     contracts = Contract.objects.values('city__name', 'room').annotate(
+#         room_count=Count('room'),
+#         total_money=Sum('money'),
+#         total_advance_payment=Sum('advance_payment')
+#     ).order_by('city__name', 'room')
+
+#     context = {
+#         'contracts': contracts,
+#     }
+#     return render(request, 'admin_chek.html', context)
+
 def CheckPage(request):
     contracts = Contract.objects.values('city__name', 'room').annotate(
         room_count=Count('room'),
@@ -56,4 +68,10 @@ def CheckPage(request):
     context = {
         'contracts': contracts,
     }
-    return render(request, 'admin_chek.html', context)
+    html = render_to_string('admin_chek.html', context)
+    
+    pdf = weasyprint.HTML(string=html).write_pdf()
+    
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="contract_check.pdf"'
+    return response
