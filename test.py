@@ -1,22 +1,57 @@
-from eskiz_sms import EskizSMS
 
-# Создаем экземпляр класса EskizSMS
-sms_sender = EskizSMS(api_key='https://notify.eskiz.uz/api', api_secret='zeyu5tlOIttzoINCFEpPVXBe2n1KuWu5tXJnKa0q')
 
-# Номер телефона, на который отправляем SMS
-phone_number = '+998883601656'
 
-# Текст сообщения
-message = 'salom maktab'
 
-# Отправка SMS
-response = sms_sender.send_sms(to=phone_number, text=message)
 
-# Обработка ответа
-if response['status'] == 'success':
-    print('SMS успешно отправлено')
-else:
-    print(f'Ошибка при отправке SMS: {response["message"]}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from eskiz_sms import EskizSMS
+
+# # Создаем экземпляр класса EskizSMS
+# sms_sender = EskizSMS(api_key='https://notify.eskiz.uz/api', api_secret='zeyu5tlOIttzoINCFEpPVXBe2n1KuWu5tXJnKa0q')
+
+# # Номер телефона, на который отправляем SMS
+# phone_number = '+998883601656'
+
+# # Текст сообщения
+# message = 'salom maktab'
+
+# # Отправка SMS
+# response = sms_sender.send_sms(to=phone_number, text=message)
+
+# # Обработка ответа
+# if response['status'] == 'success':
+#     print('SMS успешно отправлено')
+# else:
+#     print(f'Ошибка при отправке SMS: {response["message"]}')
 
 
 
@@ -52,11 +87,6 @@ else:
 
 
 
-
-
-
-
-
 # class="row products-list"
 
 
@@ -64,4 +94,5 @@ else:
 # for havo in html_content.select('#main'):
 #     min = havo.select('.day-link')
 #     print(min)
-
+a = 10000000
+print(f'{a:_}')

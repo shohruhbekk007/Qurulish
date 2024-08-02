@@ -10,12 +10,12 @@ from django.shortcuts import redirect
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
+# admin.site.register(HouseMod)
 
-
-@admin.register(User)
-class UserAdmin(ModelAdmin):
-    list_display = ("username", "is_active", "is_staff")
-    fields = ["username", "first_name", "last_name", "is_staff", "is_active", "email"]
+# @admin.register(User)
+# class UserAdmin(ModelAdmin):
+#     list_display = ("username", "is_active", "is_staff")
+#     fields = ["username", "first_name", "last_name", "is_staff", "is_active", "email"]
 
 
 @admin.register(City)
@@ -23,10 +23,15 @@ class CityAdmin(ModelAdmin):
     list_display = ("name",)
     fields = list_display
 
+@admin.register(Room)
+class RoomCity(ModelAdmin):
+    list_display = ('city', 'number')
 
 @admin.register(Costumer)
 class CustomerAdmin(ModelAdmin):
     list_display = ('first_name', 'last_name', 'father_name', 'phone_number', 'mavzu')
+    list_filter = ('mavzu',) 
+    
     def get_row_color(self, obj):
         return 'colorize-row' if obj.mavzu != 'sotib olmoqchi' else ''
 

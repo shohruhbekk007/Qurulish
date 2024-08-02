@@ -19,7 +19,7 @@ def contract_pdf_view(request, contract_id):
     context = {
         'contract': contract,
     }
-    html = render_to_string('chek_one.html', context)
+    html = render_to_string('chek_mijozlar.html', context)
     
     pdf = weasyprint.HTML(string=html).write_pdf()
     
